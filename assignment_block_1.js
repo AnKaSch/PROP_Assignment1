@@ -1,2 +1,9 @@
 var project = "Assignment block 1";
 print(project);
+
+
+var myObject = {
+    create: function () {
+
+    }
+}
