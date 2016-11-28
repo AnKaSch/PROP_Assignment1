@@ -6,7 +6,7 @@ var myObject = {
 	prototypeList: [],
 	
 	create: function(prototypeList) {
-		var newObj = Object.create(this);
+		var newObj = Object.create(myObject);
 		return newObj;
 	},
 	call: function(funcName, parameters) {
