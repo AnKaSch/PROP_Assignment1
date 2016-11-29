@@ -8,16 +8,17 @@ var myObject = {
 	},
 	
 	create: function(prototypeList) {
-		var newObj;
 		if(prototypeList === null) {
+			console.log("Nullobjekt");
 			listOfPrototypes = undefined;
 			newObj = Object.create(myObject);
 		} else if (prototypeList[0] === null || prototypeList[0] === undefined){
-			console.log("Tom lista!");
 			listOfPrototypes = prototypeList;
-			newObj = Object.create(myObject);
+			console.log("Tom lista-objekt");
+			newObj = prototypeList;//Object.create(myObject);
 		} else {
 			listOfPrototypes = prototypeList;
+			console.log("Nytt/nya objekt");
 			newObj = prototypeList;
 		}
 		console.log("Nytt? "+newObj);
@@ -33,8 +34,8 @@ var objOne = myObject.create([objZero]);
 var objTwo = myObject.create([]);
 objTwo.func = function(arg) {return "Function2 " + arg};
 var objThree = myObject.create([objOne, objTwo]);
-var result = objThree.call("Function ", + ["Test"]);
-console.log(result);
+//var result = objThree.call("Function ", + ["Test"]);
+//console.log(result);
 
 
 
