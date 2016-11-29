@@ -3,7 +3,7 @@ print(project);
 
 var myObject = {
 	
-	prototypeList: [],
+	listOfProtos: [],
 	
 	create: function(prototypeList) {
 		var newObj = Object.create(myObject);
