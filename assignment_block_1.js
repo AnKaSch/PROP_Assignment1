@@ -34,13 +34,9 @@ var objOne = myObject.create([objZero]);
 var objTwo = myObject.create([]);
 objTwo.func = function(arg) {return "Function2 " + arg};
 var objThree = myObject.create([objOne, objTwo]);
-//var result = objThree.call("Function ", + ["Test"]);
-//console.log(result);
+var result = objThree.call("Function ", + ["Test"]);
+console.log(result);
 
-
-
-
-/*  */
 
 
 //Kan behöva ta med ex. newOb.__proto__ = oldProto;
