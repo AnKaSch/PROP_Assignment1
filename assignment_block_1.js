@@ -7,18 +7,19 @@ var myObject = {
 	
 	create: function(prototypeList) {
 		if(prototypeList instanceof Array || prototypeList === null) {
-			if(prototypeList === null) {
-				var newObj = Object.create(myObject);
+			//if(prototypeList === null) {
+				/var newObj = Object.create(myObject);
 				//console.log("Nullobjekt" + newObj);
-			} else if (prototypeList[0] === null || prototypeList[0] === undefined){
+			//} else if (prototypeList[0] === null || prototypeList[0] === undefined){
 				//this.listOfPrototypes = prototypeList;
 				var newObj = Object.create(myObject);
 				//console.log("Tom lista-objekt:" + this.newObj);
 			//} else {
-			} else if (prototypeList != null) {
+			//} else if (prototypeList != null) {
+			if (prototypeList != null) {
 				for(var i = 0; i < prototypeList.length; i++) {
-        if (this.listOfPrototypes.indexOf(prototypeList[i]) == - 1) {
-          //this.listOfPrototypes.push(prototypeList[i]);
+        				if (this.listOfPrototypes.indexOf(prototypeList[i]) == - 1) {
+          				//this.listOfPrototypes.push(prototypeList[i]);
 					var value = prototypeList[i];
 					//console.log(value + " Value");
 					value.__proto__ = myObject;
