@@ -2,6 +2,8 @@
 
 var myObject = {
 	
+	id: 10,
+	
 	listOfPrototypes: [],
 	
 	create: function(prototypeList) {
@@ -40,4 +42,10 @@ var objTwo = myObject.create([]);
 objTwo.func = function(arg) {return "func2" + arg};
 var objThree = myObject.create([objOne, objTwo]);
 var result = objThree.call("func", + ["hello"]);
+console.log("Ob1 ID " + objOne.id + " Ob2 ID " + objTwo.ID + " Ob3 ID "+ objThree.id);
 console.log(result);
+
+/*
+Exception: SyntaxError: missing ) after argument list
+@Scratchpad/15:45
+*/
