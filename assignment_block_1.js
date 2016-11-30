@@ -24,13 +24,13 @@ var myObject = {
 	call: function(funcName, parameters) {
 	if (this.hasOwnProperty(funcName)) {
       //return funcName + ' ' + parameters;
-	return this[funcName].apply(this,parameters);
+	return this[funcName].call(this,parameters);
 
     } else {
       for (var i = 0; i < this.listOfPrototypes.length; i++) {
         var currentPrototype = this.listOfPrototypes[i];
         if (currentPrototype.hasOwnProperty(funcName)) {
-          return currentPrototype[funcName].apply(currentPrototype,parameters);
+          return currentPrototype[funcName].call(currentPrototype,parameters);
         }
       }
     }
