@@ -2,27 +2,30 @@
 
 var myObject = {
 	
-	id: 10,
-	
 	listOfPrototypes: [],
 	
 	create: function(prototypeList) {
 		if(prototypeList instanceof Array || prototypeList === null) {
 			if(prototypeList === null) {
-				listOfPrototypes = undefined;
 				newObj = Object.create(myObject);
 				console.log("Nullobjekt" + newObj);
 			} else if (prototypeList[0] === null || prototypeList[0] === undefined){
-				listOfPrototypes = prototypeList;
+				this.listOfPrototypes = prototypeList;
 				newObj = Object.create(myObject);
-				console.log("Tom lista-objekt:" + newObj);
+				console.log("Tom lista-objekt:" + this.newObj);
 			} else {
-				console.log(prototypeList.length() + " Längd ");
-				listOfPrototypes = prototypeList;
-				console.log("Nytt/nya objekt: " + " " + prototypeList);
-				newObj = prototypeList;
+				for(var i = 0; i < prototypeList.length; i++) {
+					value = prototypeList[i];
+					console.log(value + " Value");
+					value.__proto__ = myObject;
+					this.listOfPrototypes.push(value);
+					console.log(i + " index" + " " + this.listOfPrototypes);
+				}
 			}
-			console.log("Nytt? "+newObj);
+				console.log("Nytt/nya objekt: " + " " + this.listOfPrototypes);
+				this.newObj = prototypeList;
+			//}
+			console.log("Nytt? "+this.newObj);
 			return newObj;
 			}
 	},
@@ -31,19 +34,10 @@ var myObject = {
 };
 
 var objZero = myObject.create(null);
-console.log(objZero.id);
-objZero.func = function(arg) { return "Function1 " + arg};
+objZero.func = function(arg) { return "func0" + arg};
 var objOne = myObject.create([objZero]);
 var objTwo = myObject.create([]);
-objTwo.func = function(arg) {return "Function2 " + arg};
+objTwo.func = function(arg) {return "func2" + arg};
 var objThree = myObject.create([objOne, objTwo]);
-var result = objThree.call("func", + ["Test"]);
+var result = objThree.call("func", + ["hello"]);
 console.log(result);
-
-
-
-
-/*  */
-
-
-//Kan behöva ta med ex. newOb.__proto__ = oldProto;
