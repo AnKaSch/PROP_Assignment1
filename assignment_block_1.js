@@ -7,7 +7,7 @@ var myObject = {
 	
 	create: function(prototypeList) {
 		if(prototypeList instanceof Array || prototypeList === null || prototypeList[0] === null || prototypeList[0] === undefined) {			
-				var newObj = Object.create(myObject);
+			var newObj = Object.create(myObject);
 			if (prototypeList != null) {
 				for(var i = 0; i < prototypeList.length; i++) {
         				if (this.listOfPrototypes.indexOf(prototypeList[i]) == - 1) {
