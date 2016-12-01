@@ -32,21 +32,3 @@ classTwo.func = function(arg) {return "func2 " + arg;};
 var classThree = createClass("Class3", [classOne, classTwo]);
 var obj3 = classThree.new();
 var result = obj3.call("func", ["Hello"]);
-
-
-/*
-Exception: ReferenceError: my is not defined
-@Scratchpad/3:16:1
-*/
-/*
-Exception: ReferenceError: my is not defined
-@Scratchpad/3:16:1
-*/
-/*
-Exception: SyntaxError: expected expression, got '='
-@Scratchpad/3:16
-*/
-/*
-Exception: TypeError: classZero is undefined
-@Scratchpad/3:27:1
-*/
