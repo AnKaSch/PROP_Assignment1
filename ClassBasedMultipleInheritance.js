@@ -1,21 +1,22 @@
 /*Grupp 9: Cecilia Bergman, Anna Schuback*/
 
+
 function createClass(className, superClassList) {
 	//Object.defineProperty(this, 'new()', {newObject: function() {return (...skapa objekt...)}});, funderar om detta är ett sätt skugga över new-operatorn och skapa en new()-metod
-	
+	var className;
 	var supClassList = [];
 	console.log("Parametrar " + className + " "+ superClassList); //Endast för att skriva ut parametrar, ska tas bort vid inlämning
 	this.className=className;
 	if(superClassList == null || superClassList instanceof Array || superClassList[0] == null || superClassList[0] == undefined) {
-		if(superClassList == null || superClassList[0] ==null) {
+		if(superClassList == null) {
 		  supClassList = null;
 	} else if(superClassList[0] == undefined) {
-		  this.supClassList = undefined;
+		  supClassList = undefined;
 	} else if (superClassList != null || superClassList != undefined) {
 		  for(var index = 0; index < superClassList.length; index++) {
 			  var value = superClassList[index];
-			  console.log("Index " +value + " Längd på listan "+superClassList.length);
-			  this.supClassList.push(value);
+		      console.log("Index " +value + " Längd på listan "+superClassList.length);
+			  supClassList.push(value);
 		  }
 	}
 		 console.log("Ny lista " + supClassList);  /*Endast för att testa att skriva ut den nya listan*/
@@ -55,3 +56,4 @@ var classThree = createClass("Class3", [classOne, classTwo]);
 			   //this.supClassList.push(value);
 		 // }
 		//}
+
