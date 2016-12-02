@@ -1,60 +1,50 @@
-
-
 function createClass(className, superClassList) {
 	this.cName=className;
-	var listOfSuperClasses = [];
+	listOfSuperClasses = [];
 	
 	if(superClassList == null || superClassList instanceof Array || superClassList[0] == null || superClassList[0] == undefined) {
-		 if(superClassList == null) {
-			   listOfSuperClasses = null;
-			} else if(superClassList[0] == undefined) {
-				 listOfSuperClasses = undefined;
-			} else if (superClassList != null || superClassList != undefined) {
-				 for(var index = 0; index < superClassList.length; index++) {
-					 var value = superClassList[index];
-					 listOfSuperClasses.push(value);
-					}
+		if(superClassList == null) {
+			listOfSuperClasses = null;
+		} else if(superClassList[0] == undefined) {
+			listOfSuperClasses = undefined;
+		} else if (superClassList != null || superClassList != undefined) {
+			for(var index = 0; index < superClassList.length; index++) {
+				var indexValue = superClassList[index];
+				listOfSuperClasses.push(indexValue);
 			}
+		}
 	};
-
 	var createdClass = {
-	o1: console.log("KLASS "+cName+ " List "+listOfSuperClasses), //ENDAST TESTNING
+		cName,
+		listOfSuperClasses,
 		new: function() {
-			var instanceOfClass = this;   //console.log("Testar call();" + funcName + " "+parameters);
-			//var listS = this.listOfSuperClasses;
-			var instanceObj = {
-			call: function(funcName, parameters) {
-				if(instanceOfClass.hasOwnProperty(funcName)) { 
-					return instanceOfClass[funcName].apply(instanceOfClass, parameters);
-				}else{
-				for(var index = 0; index < listOfSuperClasses.length; index++) {
-					var current = listOfSuperClasses[index];
-					console.log("Current " + current.cName);
-					if(current.hasOwnProperty(funcName)) {
-						return current[funcName].apply(current, parameters);
-					}
+			var instanceOfClass = this;
+			instanceOfClass.call = function(funcName, parameters) {
+			if(this.hasOwnProperty(funcName)) { 		
+				return this[funcName].apply(this, parameters);
+			} else if (this.listOfSuperClasses != null || this.listOfSuperClasses == 'undefined'){
+				for(var index = 0; index < this.listOfSuperClasses.length; index++) {
+					var current = this.listOfSuperClasses[index];
+					console.log("Ja " + current.cName + " "+ current[funcName]);
+					return current.new().call(funcName, parameters);
 				}
 			}
-   		} 
-	}
-	console.log("TESTAR: " + instanceOfClass.cName + ","+ instanceOfClass.listOfSuperClasses);
-	return instanceObj;
-	}
-  	}
+			}; 
+			return instanceOfClass;
+		},
+	};
 	return createdClass;
 };
 
 
-
 var class0 = createClass("Class0", null);
-class0.func0 = function(arg) { return "func0: " + arg; };
+class0.func = function(arg) { return "func0: " + arg; };
 var class1 = createClass("Class1", [class0]);
 var class2 = createClass("Class2", []);
-class2.func2 = function(arg) { return "func2: " + arg; };
+class2.func = function(arg) { return "func2: " + arg; };
 var class3 = createClass("Class3", [class1, class2]);
 var obj3 = class3.new();
-var result = obj3.call("func2", ["hello"]);
+var result = obj3.call("func", ["hello"]);
 
 
 console.log(result);
-
