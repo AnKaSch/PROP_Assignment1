@@ -18,14 +18,10 @@ function createClass(className, superClassList) {
 	};
 
 	var createdClass = {
-	  //cName: className,
-		//listOfSuperClasses: superClassList,
-		o1: console.log("KLASS "+cName+ " List "+listOfSuperClasses), //ENDAST TESTNING
-		
+	o1: console.log("KLASS "+cName+ " List "+listOfSuperClasses), //ENDAST TESTNING
 		new: function() {
-			var instanceOfClass = this;                 //console.log("Testar call();" + funcName + " "+parameters);
+			var instanceOfClass = this;   //console.log("Testar call();" + funcName + " "+parameters);
 			//var listS = this.listOfSuperClasses;
-			
 			var instanceObj = {
 			call: function(funcName, parameters) {
 				if(instanceOfClass.hasOwnProperty(funcName)) { 
@@ -39,15 +35,13 @@ function createClass(className, superClassList) {
 					}
 				}
 			}
-   } 
+   		} 
 	}
-			console.log("TESTAR: " + instanceOfClass.cName + ","+ instanceOfClass.listOfSuperClasses);
-			return instanceObj;
-	  }
-
-  }
-
-		    return createdClass;
+	console.log("TESTAR: " + instanceOfClass.cName + ","+ instanceOfClass.listOfSuperClasses);
+	return instanceObj;
+	}
+  	}
+	return createdClass;
 };
 
 
