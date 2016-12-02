@@ -18,14 +18,16 @@ function createClass(className, superClassList) {
 			}
 	};
 
-	//Object.defineProperty(this, 'new()', {newObject: function() {return (...skapa objekt...)}});, funderar om detta är ett sätt skugga över new-operatorn och skapa en new()-metod
 	var createdClass = {
 	  cName,
 		listOfSuperClasses,
-		o1: console.log("KLASS "+cName + " List "+listOfSuperClasses), //Testning
+		o1: console.log("KLASS "+cName+ " List "+listOfSuperClasses), //ENDAST TESTNING
 		
 		new: function() {
-			console.log("Testar");
+			instanceOfClass = this;
+			instanceOfClass.call = function(funcName, parameters) {console.log("Testar call();" + funcName + " "+parameters);};
+			console.log("TESTAR: " + instanceOfClass.cName + ","+ instanceOfClass.listOfSuperClasses);
+			      return instanceOfClass;
 	  },
 		
 		getList: function() {
@@ -35,35 +37,29 @@ function createClass(className, superClassList) {
   };
 
 		  //console.log("Ny lista " + listOfSuperClasses);  /*Endast för att testa att skriva ut den nya listan*/
-		    return createdClass;//className + " " + supClassList;
-};
-
-
-//new = function() { ev ta bort då new är en operator, bör skugga över funktionen på något sätt
-	//ska returnera ett nytt objekt av en viss klass
-//};
-
-
-call = function (funcName, parameters) {
-	if(this.hasOwnProperty(funcName)) {
-		return funcName + " " + parameters;
-	}
-	
+		    return createdClass;
 };
 
 var classZero = createClass("Class0 ", null);
 console.log("Nytt objekt 0 " + classZero.getList()); //ENDAST TESTNING
+var obj0 = classZero.new(); //ENDAST TESTNING
 
 classZero.func = function(arg) {return "func0: "+ arg;};
 var classOne = createClass("Class1", [classZero]);
-console.log("Nytt objekt 1 " + classOne.cName); //ENDAST TESTNING
+var obj1 = classOne.new(); //ENDAST TESTNING
 
 var classTwo = createClass("Class2",[]);
 console.log("Nytt objekt 2 " + classTwo.cName); //ENDAST TESTNING
+var obj2 = classTwo.new(); //ENDAST TESTNING
+
 
 classTwo.func = function(arg) {return "func2 " + arg;};
 var classThree = createClass("Class3", [classOne, classTwo]);
 console.log("Nytt objekt 3 " + classThree.listOfSuperClasses); //ENDAST TESTNING
 
 var objThree = classThree.new();
-//var result = objThree.call("func", ["Hello"]);
+var resa = classThree.call("func", ["World"]); //ENDAST TESTNING
+var result = objThree.call("func", ["Hello"]);
+
+console.log("Går det? " +objThree.cName + " "+objThree.getList());//ENDAST TESTNING
+
