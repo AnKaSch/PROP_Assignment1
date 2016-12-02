@@ -1,6 +1,6 @@
 function createClass(className, superClassList) {
 	this.cName=className;
-	listOfSuperClasses = [];
+	var listOfSuperClasses = [];
 	
 	if(superClassList == null || superClassList instanceof Array || superClassList[0] == null || superClassList[0] == undefined) {
 		if(superClassList == null) {
@@ -25,7 +25,6 @@ function createClass(className, superClassList) {
 			} else if (this.listOfSuperClasses != null || this.listOfSuperClasses == 'undefined'){
 				for(var index = 0; index < this.listOfSuperClasses.length; index++) {
 					var current = this.listOfSuperClasses[index];
-					console.log("Ja " + current.cName + " "+ current[funcName]);
 					return current.new().call(funcName, parameters);
 				}
 			}
@@ -45,6 +44,5 @@ class2.func = function(arg) { return "func2: " + arg; };
 var class3 = createClass("Class3", [class1, class2]);
 var obj3 = class3.new();
 var result = obj3.call("func", ["hello"]);
-
 
 console.log(result);
