@@ -66,4 +66,4 @@ var classThree = createClass("Class3", [classOne, classTwo]);
 console.log("Nytt objekt 3 " + classThree.listOfSuperClasses); //ENDAST TESTNING
 
 var objThree = classThree.new();
-//var result = obj3.call("func", ["Hello"]);
+//var result = objThree.call("func", ["Hello"]);
