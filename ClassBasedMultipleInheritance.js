@@ -12,53 +12,50 @@ function createClass(className, superClassList) {
 				 listOfSuperClasses = undefined;
 			} else if (superClassList != null || superClassList != undefined) {
 				 for(var index = 0; index < superClassList.length; index++) {
-					 var value = superClassList[index];
-					 listOfSuperClasses.push(value);
+					 var indexValue = superClassList[index];
+					 listOfSuperClasses.push(indexValue);
 					}
 			}
 	};
 
 	var createdClass = {
-	  cName,
+		cName,
 		listOfSuperClasses,
-		o1: console.log("KLASS "+cName+ " List "+listOfSuperClasses), //ENDAST TESTNING
 		
 		new: function() {
-			instanceOfClass = this;                 //console.log("Testar call();" + funcName + " "+parameters);
-			instanceOfClass.call = function(funcName, parameters) {console.log("Är här");if(this.hasOwnProperty(funcName)) { 
+			//tempValue = "";
+			instanceOfClass = this;
+			console.log("Nuvarande klass: "+instanceOfClass.cName);
+			instanceOfClass.call = function(funcName, parameters) {console.log("Är här " + funcName);
+			//tempValue = funcName;
+			if(this.hasOwnProperty(funcName)) { 
 				console.log("Ja");
 				return this[funcName].apply(this, parameters);
 			} else {
-				console.log("Nej");
 				for(var index = 0; index < this.listOfSuperClasses.length; index++) {
 					var current = this.listOfSuperClasses[index];
 					console.log("Current " + current.cName);
 					if(current.hasOwnProperty(funcName)) {
-						console.log("Ja " + current.cName);
-						return instanceOfClass.call(current, parameters);
+						console.log("Ja " + current.cName + " "+ current[funcName]);
+						return current.new().call(funcName, parameters);
 					}
 				}
 			}
-   }; 
-			console.log("TESTAR: " + instanceOfClass.cName + ","+ instanceOfClass.listOfSuperClasses);
+		}; 
 			      return instanceOfClass;
 	  },
 		
-		getList: function() {
-			return listOfSuperClasses;
-		}
-
   };
 
-		  //console.log("Ny lista " + listOfSuperClasses);  /*Endast för att testa att skriva ut den nya listan*/
 		    return createdClass;
 };
 
 var classZero = createClass("Class0 ", null);
-console.log("Nytt objekt 0 " + classZero.getList()); //ENDAST TESTNING
+console.log("Nytt objekt 0 " + classZero.listOfSuperClasses); //ENDAST TESTNING
 
 classZero.func = function(arg) {return "func0: "+ arg;};
 var classOne = createClass("Class1", [classZero]);
+//classOne.func = function(arg) {return "func1: " + arg;};
 
 var classTwo = createClass("Class2",[]);
 console.log("Nytt objekt 2 " + classTwo.cName); //ENDAST TESTNING
@@ -68,6 +65,6 @@ var classThree = createClass("Class3", [classOne, classTwo]);
 console.log("Nytt objekt 3 " + classThree.listOfSuperClasses); //ENDAST TESTNING
 
 var objThree = classThree.new();
+//classThree.func = function(arg) {return "func3: " + arg;}; //test
 var result = objThree.call("func", ["Hello"]);
-
-console.log("Om objThree; " +objThree.cName + " "+objThree.getList());//ENDAST TESTNING
+console.log(result);
