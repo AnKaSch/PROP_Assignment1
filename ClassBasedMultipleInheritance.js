@@ -24,8 +24,22 @@ function createClass(className, superClassList) {
 		o1: console.log("KLASS "+cName+ " List "+listOfSuperClasses), //ENDAST TESTNING
 		
 		new: function() {
-			instanceOfClass = this;
-			instanceOfClass.call = function(funcName, parameters) {console.log("Testar call();" + funcName + " "+parameters);};
+			instanceOfClass = this;                 //console.log("Testar call();" + funcName + " "+parameters);
+			instanceOfClass.call = function(funcName, parameters) {console.log("Är här");if(this.hasOwnProperty(funcName)) { 
+				console.log("Ja");
+				return this[funcName].apply(this, parameters);
+			} else {
+				console.log("Nej");
+				for(var index = 0; index < this.listOfSuperClasses.length; index++) {
+					var current = this.listOfSuperClasses[index];
+					console.log("Current " + current.cName);
+					if(current.hasOwnProperty(funcName)) {
+						console.log("Ja " + current.cName);
+						return instanceOfClass.call(current, parameters);
+					}
+				}
+			}
+   }; 
 			console.log("TESTAR: " + instanceOfClass.cName + ","+ instanceOfClass.listOfSuperClasses);
 			      return instanceOfClass;
 	  },
@@ -42,24 +56,18 @@ function createClass(className, superClassList) {
 
 var classZero = createClass("Class0 ", null);
 console.log("Nytt objekt 0 " + classZero.getList()); //ENDAST TESTNING
-var obj0 = classZero.new(); //ENDAST TESTNING
 
 classZero.func = function(arg) {return "func0: "+ arg;};
 var classOne = createClass("Class1", [classZero]);
-var obj1 = classOne.new(); //ENDAST TESTNING
 
 var classTwo = createClass("Class2",[]);
 console.log("Nytt objekt 2 " + classTwo.cName); //ENDAST TESTNING
-var obj2 = classTwo.new(); //ENDAST TESTNING
 
-
-classTwo.func = function(arg) {return "func2 " + arg;};
+classTwo.func = function(arg) {return "func2: " + arg;};
 var classThree = createClass("Class3", [classOne, classTwo]);
 console.log("Nytt objekt 3 " + classThree.listOfSuperClasses); //ENDAST TESTNING
 
 var objThree = classThree.new();
-var resa = classThree.call("func", ["World"]); //ENDAST TESTNING
 var result = objThree.call("func", ["Hello"]);
 
 console.log("Om objThree; " +objThree.cName + " "+objThree.getList());//ENDAST TESTNING
-
