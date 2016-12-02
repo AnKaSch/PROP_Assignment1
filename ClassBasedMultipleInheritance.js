@@ -61,5 +61,5 @@ var objThree = classThree.new();
 var resa = classThree.call("func", ["World"]); //ENDAST TESTNING
 var result = objThree.call("func", ["Hello"]);
 
-console.log("Går det? " +objThree.cName + " "+objThree.getList());//ENDAST TESTNING
+console.log("Om objThree; " +objThree.cName + " "+objThree.getList());//ENDAST TESTNING
 
