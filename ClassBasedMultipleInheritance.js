@@ -1,3 +1,5 @@
+/*Grupp 9: Cecilia Bergman, Anna Schuback*/
+
 function createClass(className, superClassList) {
 	this.cName=className;
 	var listOfSuperClasses = [];
