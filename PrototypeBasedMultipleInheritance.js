@@ -2,7 +2,6 @@
 
 
 var myObject = {
-	
 	listOfPrototypes: [],
 	
 	create: function(prototypeList) {
@@ -10,30 +9,29 @@ var myObject = {
 			var newObj = Object.create(myObject);
 			if (prototypeList != null) {
 				for(var i = 0; i < prototypeList.length; i++) {
-        				if (this.listOfPrototypes.indexOf(prototypeList[i]) == - 1) {
-							var value = prototypeList[i];
-							value.__proto__ = myObject;
-							this.listOfPrototypes.push(value);
-						}
+					if (this.listOfPrototypes.indexOf(prototypeList[i]) == - 1) {
+						var value = prototypeList[i];
+						value.__proto__ = myObject;
+						this.listOfPrototypes.push(value);
 					}
 				}
 			}
+		}
 		return newObj;
 	},
 	
 	call: function(funcName, parameters) {
-	if (this.hasOwnProperty(funcName)) {
-		return this[funcName].apply(this,parameters);
-
-    } else {
-      for (var i = 0; i < this.listOfPrototypes.length; i++) {
-        var currentPrototype = this.listOfPrototypes[i];
-        if (currentPrototype.hasOwnProperty(funcName)) {
-          return currentPrototype[funcName].apply(currentPrototype,parameters);
-        }
-      }
-    }
-  }
+		if (this.hasOwnProperty(funcName)) {
+			return this[funcName].apply(this,parameters);
+		} else {
+			for (var i = 0; i < this.listOfPrototypes.length; i++) {
+				var currentPrototype = this.listOfPrototypes[i];
+				if (currentPrototype.hasOwnProperty(funcName)) {
+					return currentPrototype[funcName].apply(currentPrototype,parameters);
+				}
+			}
+		}
+	}
 };
 	
 var obj0 = myObject.create(null);
@@ -43,4 +41,5 @@ var obj2 = myObject.create([]);
 obj2.func = function(arg) { return "func2: " + arg; };
 var obj3 = myObject.create([obj1, obj2]);
 var result = obj3.call("func", ["hello"]);
+
 console.log(result);
